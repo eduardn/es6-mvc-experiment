@@ -23,7 +23,7 @@ export class Router {
         });
     }
 
-    callRoute(path, response) {
+    callRoute(path) {
         var route = null;
 
         this.routes.forEach(function (r) {
@@ -41,9 +41,9 @@ export class Router {
 
         var params = this.getParameterValues(route, path);
         var ctrlFn = (require('../../controllers/' + route.controller)[route.controller]);
-        var ctrl = new ctrlFn(response);
+        var ctrl = new ctrlFn();
 
-        ctrl[route.action](...params);
+        return ctrl[route.action](...params);
     }
 
     getParameterValues(route, path) {
