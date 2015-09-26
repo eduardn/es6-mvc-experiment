@@ -55,10 +55,28 @@ module.exports = function (grunt) {
             dist: {
                 files: files
             }
+        },
+        watch: {
+            scripts: {
+                files: ['src/**/*.js'],
+                tasks: ['babel', 'forever:server:stop', 'forever:server:start']
+            }
+        },
+        forever: {
+            server: {
+                options: {
+                    index: 'dist/app.js',
+                    logDir: 'logs',
+                    logFile: '.server_logs'
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-babel');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-forever');
 
+    grunt.registerTask('server', ['babel', 'forever:server:start', 'watch']);
     grunt.registerTask('default', ['babel']);
 }
