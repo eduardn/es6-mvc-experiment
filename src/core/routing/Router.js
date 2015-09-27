@@ -42,6 +42,13 @@ export class Router {
         var params = this.getParameterValues(route, path);
         var ctrlFn = (require('../../controllers/' + route.controller)[route.controller]);
         var ctrl = new ctrlFn();
+        var routeFunction = ctrl[route.action];
+
+        // TODO: Check for a funciton instead of truthy
+        if (!routeFunction) {
+            console.error('No function found for ', route.controller + '#' + route.action);
+            return;
+        }
 
         return ctrl[route.action](...params);
     }

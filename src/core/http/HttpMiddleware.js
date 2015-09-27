@@ -10,8 +10,10 @@ export function HTTPMiddleware(req, res, next) {
     // get the response function from the controller
     var resFn = router.callRoute(parsedUrl.pathname, res);
 
-    // execute response function
-    resFn(res);
+    if (resFn) {
+        // execute response function
+        resFn(res);
+    }
 
     next();
 }
