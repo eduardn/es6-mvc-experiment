@@ -1,3 +1,12 @@
+/**
+ * Simple connect middleware that reads the url of the request
+ * and forwrads the request to the right controller and function.
+ *
+ * @file: HttpRoutingMiddleware.js
+ *
+ * @author: Eduard Neculaesi <neculaesi.eduard@gmail.com>
+ * @since: 0.1
+ */
 
 import {Router} from '../../routing/Router';
 

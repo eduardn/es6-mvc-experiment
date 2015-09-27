@@ -1,5 +1,20 @@
+/**
+ * Route annotation for making a controller function respond to
+ * a certain route.
+ *
+ * @file: RouterAnnotation.js
+ *
+ * @author: Eduard Neculaesi <neculaesi.eduard@gmail.com>
+ * @since: 0.1
+ */
+
 import {Router} from './Router';
 
+/**
+ * Available HTTP Methods for the route annotation.
+ *
+ * @type {Array}
+ */
 var availableMethods = [
     'GET',
     'POST',
@@ -8,6 +23,12 @@ var availableMethods = [
     'DELETE'
 ];
 
+/**
+ * Route annotation function.
+ *
+ * @param {String} method    HTTP Method for this route
+ * @param {String} routeName A route string definition
+ */
 export function Route(method, routeName) {
 
     if (availableMethods.indexOf(method) === -1) {

@@ -30,7 +30,6 @@ export class UsersController {
 
     @Route('POST', '/users/:userId/friends/:friendId')
     addFriend(userId, friendId) {
-        console.log(userId, friendId);
         return TextResponse.send('Adding friend ' + friendId + ' to user ' + userId);
     }
 

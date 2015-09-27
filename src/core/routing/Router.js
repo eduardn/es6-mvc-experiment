@@ -1,3 +1,13 @@
+/**
+ * Main router class. This will be a singleton the entire
+ * application lifecycle.
+ *
+ * @file: Router.js
+ *
+ * @author: Eduard Neculaesi <neculaesi.eduard@gmail.com>
+ * @since: 0.1
+ */
+
 export class Router {
     // Make router a singleton
     static instance() {
@@ -13,6 +23,15 @@ export class Router {
         this.routes = [];
     }
 
+    /**
+     * Adds a route to the list of available routes.
+     *
+     * @param {String} route      Route path
+     * @param {String} controller Controller name
+     * @param {String} action     Name of the function to be executed when
+     *                            route is intercepted
+     * @param {String} method     HTTP Method of this route
+     */
     addRoute(route, controller, action, method) {
         var routeMatcher = this.buildRouteMatcher(route);
         this.routes.push({
@@ -24,6 +43,15 @@ export class Router {
         });
     }
 
+    /**
+     * Calls a controller function based on the route and method
+     * of the request.
+     *
+     * @param  {String}   path Route from the url
+     * @param  {Object}   req  Request object used to get the HTTP Method
+     *
+     * @return {function}      A response function
+     */
     callRoute(path, req) {
         var route = null;
         var method = req.method;
@@ -60,6 +88,16 @@ export class Router {
         return ctrl[route.action](...params);
     }
 
+    /**
+     * Gets the parameter values from the path based on
+     * the route's definition.
+     *
+     * @param  {Object} route The matched route
+     * @param  {String} path  Route from the request url
+     *
+     * @return {Object}       An array with the parameter values in the
+     *                        route definition order.
+     */
     getParameterValues(route, path) {
         var routeParts = route.name.split('/');
         var pathParts = path.split('/');
@@ -76,6 +114,13 @@ export class Router {
         })
     }
 
+    /**
+     * Builds a regex for matching the provided route.
+     *
+     * @param  {String} route A string definition for a route
+     *
+     * @return {RegExp}       A regexp that will match the string definition
+     */
     buildRouteMatcher(route) {
         // Strip first '/' if present
         if (route.charAt(0) === '/') {

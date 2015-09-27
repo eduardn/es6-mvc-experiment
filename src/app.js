@@ -1,3 +1,13 @@
+/**
+ * Main application file. When run it loads all the middlewares and
+ * controllers
+ *
+ * @file: app.js
+ *
+ * @author: Eduard Neculaesi <neculaesi.eduard@gmail.com>
+ * @since: 0.1
+ */
+
 import {HTTPBodyMiddleware} from './core/http/middlewares/HttpBodyMiddleware';
 import {HTTPRoutingMiddleware} from './core/http/middlewares/HttpRoutingMiddleware';
 
