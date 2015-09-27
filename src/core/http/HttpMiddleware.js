@@ -25,8 +25,13 @@ export function HTTPMiddleware(req, res, next) {
 }
 
 function parseQueryParams(query) {
-    var keyValueParts = query.split('&');
     var params = {};
+
+    if (!query) {
+        return params;
+    }
+
+    var keyValueParts = query.split('&');
 
     keyValueParts.forEach(function (keyValue) {
         var parts = keyValue.split('=');
