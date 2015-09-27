@@ -13,9 +13,10 @@ export class Router {
         this.routes = [];
     }
 
-    addRoute(route, controller, action) {
+    addRoute(route, controller, action, method) {
         var routeMatcher = this.buildRouteMatcher(route);
         this.routes.push({
+            method: method,
             name: route,
             controller: controller,
             action: action,
@@ -25,11 +26,12 @@ export class Router {
 
     callRoute(path, req) {
         var route = null;
+        var method = req.method;
 
         this.routes.forEach(function (r) {
             var matches = r.matcher.exec(path);
 
-            if (matches && matches[0] === path) {
+            if (matches && matches[0] === path && r.method === method) {
                 route = r;
             }
         });

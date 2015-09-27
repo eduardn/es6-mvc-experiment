@@ -1,10 +1,10 @@
 
-import {Router} from '../routing/Router';
+import {Router} from '../../routing/Router';
 
 var router = Router.instance();
 var url = require('url');
 
-export function HTTPMiddleware(req, res, next) {
+export function HTTPRoutingMiddleware(req, res, next) {
     var parsedUrl = url.parse(req.url);
     var queryParams = parseQueryParams(parsedUrl.query);
 
@@ -24,6 +24,7 @@ export function HTTPMiddleware(req, res, next) {
     next();
 }
 
+// TODO: Move this to a middleware
 function parseQueryParams(query) {
     var params = {};
 

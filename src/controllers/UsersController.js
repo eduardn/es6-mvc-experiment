@@ -13,7 +13,7 @@ export class UsersController {
         this.testService = testService;
     }
 
-    @Route('/users')
+    @Route('GET', '/users')
     findAll() {
         this.testService.getUsers();
 
@@ -21,6 +21,17 @@ export class UsersController {
             id: 10,
             name: 'Eduard Neculaesi'
         });
+    }
+
+    @Route('POST', '/users')
+    createUser(req) {
+        return TextResponse.send('Called createUser');
+    }
+
+    @Route('POST', '/users/:userId/friends/:friendId')
+    addFriend(userId, friendId) {
+        console.log(userId, friendId);
+        return TextResponse.send('Adding friend ' + friendId + ' to user ' + userId);
     }
 
     @Route('/users/:id')

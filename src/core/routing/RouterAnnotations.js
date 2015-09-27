@@ -1,6 +1,20 @@
 import {Router} from './Router';
 
-export function Route(routeName) {
+var availableMethods = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE'
+];
+
+export function Route(method, routeName) {
+
+    if (availableMethods.indexOf(method) === -1) {
+        routeName = method;
+        method = 'GET';
+    }
+
     if (typeof routeName !== 'string') {
         throw new Error('Route name must be string');
     }
@@ -13,6 +27,6 @@ export function Route(routeName) {
         var ctrlName = target.constructor.name;
         var router = Router.instance();
 
-        router.addRoute(routeName, ctrlName, name);
+        router.addRoute(routeName, ctrlName, name, method);
     }
 }
